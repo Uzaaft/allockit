@@ -1,7 +1,14 @@
 {
-  description = "A minimal flake template that you can adapt to your own project";
+  description = "allockit: composable allocators for Rust's Allocator trait";
 
-  inputs.nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
+  inputs = {
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
+    crane.url = "github:ipetkov/crane";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
   outputs =
     { self, ... }@inputs:
@@ -18,23 +25,63 @@
         f:
         lib.genAttrs supportedSystems (
           system:
-          f {
-            inherit system;
+          let
             pkgs = import inputs.nixpkgs {
               inherit system;
-              config.allowUnfree = true;
+              overlays = [ inputs.rust-overlay.overlays.default ];
             };
-          }
+            toolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+            craneLib = (inputs.crane.mkLib pkgs).overrideToolchain toolchain;
+          in
+          f { inherit system pkgs craneLib; }
         );
+
+      workspace =
+        craneLib:
+        let
+          src = craneLib.cleanCargoSource ./.;
+          commonArgs = {
+            inherit src;
+            strictDeps = true;
+          };
+          cargoArtifacts = craneLib.buildDepsOnly commonArgs;
+        in
+        {
+          inherit src commonArgs cargoArtifacts;
+        };
     in
     {
-      devShells = forEachSupportedSystem (
-        { pkgs, system }:
+      checks = forEachSupportedSystem (
+        { craneLib, ... }:
+        let
+          ws = workspace craneLib;
+          args = ws.commonArgs // {
+            inherit (ws) cargoArtifacts;
+          };
+        in
         {
-          default = pkgs.mkShellNoCC {
-            packages = with pkgs; [
-              self.formatter.${system}
-            ];
+          clippy = craneLib.cargoClippy (
+            args
+            // {
+              cargoClippyExtraArgs = "--workspace --all-targets -- --deny warnings";
+            }
+          );
+          test = craneLib.cargoTest (args // { cargoTestExtraArgs = "--workspace"; });
+          doc = craneLib.cargoDoc (args // { cargoDocExtraArgs = "--workspace --no-deps"; });
+          fmt = craneLib.cargoFmt { inherit (ws) src; };
+        }
+      );
+
+      devShells = forEachSupportedSystem (
+        {
+          pkgs,
+          system,
+          craneLib,
+        }:
+        {
+          default = craneLib.devShell {
+            checks = self.checks.${system};
+            packages = [ self.formatter.${system} ];
           };
         }
       );
