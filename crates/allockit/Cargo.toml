@@ -8,3 +8,11 @@ repository.workspace = true
 
 [lints]
 workspace = true
+
+[features]
+default = []
+alloc = []
+std = ["alloc"]
+
+[package.metadata.docs.rs]
+all-features = true
