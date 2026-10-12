@@ -13,9 +13,8 @@ workspace = true
 failing-allocator = { workspace = true, optional = true }
 
 [features]
-default = []
-alloc = []
-std = ["alloc"]
+default = ["std"]
+std = ["failing-allocator?/std"]
 failing-allocator = ["dep:failing-allocator"]
 
 [package.metadata.docs.rs]
