@@ -1,6 +1,6 @@
 [package]
 name = "failing-allocator"
-description = "An allocator that always fails"
+description = "An allocator wrapper that fails after a configurable number of allocations or resizes"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -8,3 +8,7 @@ repository.workspace = true
 
 [lints]
 workspace = true
+
+[features]
+default = ["std"]
+std = []
