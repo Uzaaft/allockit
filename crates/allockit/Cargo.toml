@@ -1,0 +1,10 @@
+[package]
+name = "allockit"
+description = "Composable allocators for Rust's Allocator trait"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
