@@ -9,10 +9,14 @@ repository.workspace = true
 [lints]
 workspace = true
 
+[dependencies]
+failing-allocator = { workspace = true, optional = true }
+
 [features]
 default = []
 alloc = []
 std = ["alloc"]
+failing-allocator = ["dep:failing-allocator"]
 
 [package.metadata.docs.rs]
 all-features = true
