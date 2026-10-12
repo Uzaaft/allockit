@@ -1,0 +1,10 @@
+[package]
+name = "failing-allocator"
+description = "An allocator that always fails"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true

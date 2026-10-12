@@ -9,6 +9,7 @@ rust-version = "1.100"
 repository = "https://github.com/uzaaft/allockit"
 
 [workspace.dependencies]
+failing-allocator = { path = "crates/failing-allocator", version = "0.1.0" }
 
 [workspace.metadata.crane]
 name = "allockit"

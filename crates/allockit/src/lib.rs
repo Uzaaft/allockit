@@ -7,3 +7,6 @@ extern crate alloc;
 
 #[cfg(feature = "std")]
 extern crate std;
+
+#[cfg(feature = "failing-allocator")]
+pub use failing_allocator::FailingAllocator;
