@@ -11,11 +11,13 @@ workspace = true
 
 [dependencies]
 failing-allocator = { workspace = true, optional = true }
+fixed-buffer-allocator = { workspace = true, optional = true }
 
 [features]
 default = ["std"]
-std = ["failing-allocator?/std"]
+std = ["failing-allocator?/std", "fixed-buffer-allocator?/std"]
 failing-allocator = ["dep:failing-allocator"]
+fixed-buffer-allocator = ["dep:fixed-buffer-allocator"]
 
 [package.metadata.docs.rs]
 all-features = true
