@@ -7,8 +7,13 @@ name = "allockit"
 version = "0.1.0"
 dependencies = [
  "failing-allocator",
+ "fixed-buffer-allocator",
 ]
 
 [[package]]
 name = "failing-allocator"
+version = "0.1.0"
+
+[[package]]
+name = "fixed-buffer-allocator"
 version = "0.1.0"
