@@ -83,6 +83,21 @@
             checks = self.checks.${system};
             packages = [ self.formatter.${system} ];
           };
+
+          # Miri only ships on nightly. Use with `nix develop .#miri -c cargo miri test`.
+          miri = pkgs.mkShell {
+            packages = [
+              (pkgs.rust-bin.selectLatestNightlyWith (
+                toolchain:
+                toolchain.minimal.override {
+                  extensions = [
+                    "miri"
+                    "rust-src"
+                  ];
+                }
+              ))
+            ];
+          };
         }
       );
 
