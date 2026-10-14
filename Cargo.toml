@@ -9,6 +9,7 @@ rust-version = "1.100"
 repository = "https://github.com/uzaaft/allockit"
 
 [workspace.dependencies]
+buffer-first-allocator = { path = "crates/buffer-first-allocator", version = "0.1.0", default-features = false }
 failing-allocator = { path = "crates/failing-allocator", version = "0.1.0", default-features = false }
 fixed-buffer-allocator = { path = "crates/fixed-buffer-allocator", version = "0.1.0", default-features = false }
 

@@ -1,0 +1,17 @@
+[package]
+name = "buffer-first-allocator"
+description = "A buffer-first allocator with a fallback allocator"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+fixed-buffer-allocator.workspace = true
+
+[features]
+default = ["std"]
+std = ["fixed-buffer-allocator/std"]

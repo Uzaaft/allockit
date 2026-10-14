@@ -10,12 +10,14 @@ repository.workspace = true
 workspace = true
 
 [dependencies]
+buffer-first-allocator = { workspace = true, optional = true }
 failing-allocator = { workspace = true, optional = true }
 fixed-buffer-allocator = { workspace = true, optional = true }
 
 [features]
 default = ["std"]
-std = ["failing-allocator?/std", "fixed-buffer-allocator?/std"]
+std = ["buffer-first-allocator?/std", "failing-allocator?/std", "fixed-buffer-allocator?/std"]
+buffer-first-allocator = ["dep:buffer-first-allocator"]
 failing-allocator = ["dep:failing-allocator"]
 fixed-buffer-allocator = ["dep:fixed-buffer-allocator"]
 
