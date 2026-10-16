@@ -5,5 +5,8 @@
 #[cfg(feature = "std")]
 extern crate std;
 
+#[cfg(feature = "buffer-first-allocator")]
+pub use buffer_first_allocator::BufferFirstAllocator;
+
 #[cfg(feature = "failing-allocator")]
 pub use failing_allocator::{Config, FailingAllocator};

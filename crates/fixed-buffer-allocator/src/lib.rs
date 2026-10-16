@@ -27,6 +27,10 @@ impl<'a> FixedBufferAllocator<'a> {
         }
     }
 
+    pub fn owns_ptr(&self, ptr: NonNull<u8>) -> bool {
+        ptr.addr().get().wrapping_sub(self.base.addr().get()) < self.len
+    }
+
     unsafe fn resize(
         &self,
         ptr: NonNull<u8>,
