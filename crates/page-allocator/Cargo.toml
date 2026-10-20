@@ -1,0 +1,17 @@
+[package]
+name = "page-allocator"
+description = "An allocator backed by operating-system memory mappings"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[target.'cfg(any(target_os = "macos", target_os = "linux"))'.dependencies]
+libc = { version = "0.2", default-features = false }
+
+[features]
+default = ["std"]
+std = []

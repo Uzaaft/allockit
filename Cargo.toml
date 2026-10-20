@@ -13,6 +13,7 @@ arena-allocator = { path = "crates/arena-allocator", version = "0.1.0", default-
 buffer-first-allocator = { path = "crates/buffer-first-allocator", version = "0.1.0", default-features = false }
 failing-allocator = { path = "crates/failing-allocator", version = "0.1.0", default-features = false }
 fixed-buffer-allocator = { path = "crates/fixed-buffer-allocator", version = "0.1.0", default-features = false }
+page-allocator = { path = "crates/page-allocator", version = "0.1.0", default-features = false }
 
 [workspace.metadata.crane]
 name = "allockit"
