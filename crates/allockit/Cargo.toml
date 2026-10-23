@@ -11,6 +11,7 @@ workspace = true
 
 [dependencies]
 arena-allocator = { workspace = true, optional = true }
+atomic-fixed-buffer-allocator = { workspace = true, optional = true }
 buffer-first-allocator = { workspace = true, optional = true }
 failing-allocator = { workspace = true, optional = true }
 fixed-buffer-allocator = { workspace = true, optional = true }
@@ -18,8 +19,9 @@ page-allocator = { workspace = true, optional = true }
 
 [features]
 default = ["std"]
-std = ["arena-allocator?/std", "buffer-first-allocator?/std", "failing-allocator?/std", "fixed-buffer-allocator?/std", "page-allocator?/std"]
+std = ["arena-allocator?/std", "atomic-fixed-buffer-allocator?/std", "buffer-first-allocator?/std", "failing-allocator?/std", "fixed-buffer-allocator?/std", "page-allocator?/std"]
 arena-allocator = ["dep:arena-allocator"]
+atomic-fixed-buffer-allocator = ["dep:atomic-fixed-buffer-allocator"]
 buffer-first-allocator = ["dep:buffer-first-allocator"]
 failing-allocator = ["dep:failing-allocator"]
 fixed-buffer-allocator = ["dep:fixed-buffer-allocator"]

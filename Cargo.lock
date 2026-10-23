@@ -7,6 +7,7 @@ name = "allockit"
 version = "0.1.0"
 dependencies = [
  "arena-allocator",
+ "atomic-fixed-buffer-allocator",
  "buffer-first-allocator",
  "failing-allocator",
  "fixed-buffer-allocator",
@@ -15,6 +16,10 @@ dependencies = [
 
 [[package]]
 name = "arena-allocator"
+version = "0.1.0"
+
+[[package]]
+name = "atomic-fixed-buffer-allocator"
 version = "0.1.0"
 
 [[package]]
