@@ -8,6 +8,9 @@ extern crate std;
 #[cfg(feature = "arena-allocator")]
 pub use arena_allocator::{ArenaAllocator, ResetMode};
 
+#[cfg(feature = "atomic-fixed-buffer-allocator")]
+pub use atomic_fixed_buffer_allocator::AtomicFixedBufferAllocator;
+
 #[cfg(feature = "buffer-first-allocator")]
 pub use buffer_first_allocator::BufferFirstAllocator;
 
