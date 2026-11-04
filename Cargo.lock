@@ -12,6 +12,7 @@ dependencies = [
  "failing-allocator",
  "fixed-buffer-allocator",
  "page-allocator",
+ "safe-allocator",
 ]
 
 [[package]]

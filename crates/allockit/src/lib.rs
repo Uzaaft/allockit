@@ -22,3 +22,6 @@ pub use failing_allocator::{Config, FailingAllocator};
     any(target_os = "macos", target_os = "linux")
 ))]
 pub use page_allocator::PageAllocator;
+
+#[cfg(feature = "safe-allocator")]
+pub use safe_allocator::{CheckError, LeakReport, Options, SafeAllocator};
