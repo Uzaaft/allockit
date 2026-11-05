@@ -54,3 +54,7 @@ dependencies = [
 [[package]]
 name = "safe-allocator"
 version = "0.1.0"
+
+[[package]]
+name = "smp-allocator"
+version = "0.1.0"
