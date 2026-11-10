@@ -13,6 +13,7 @@ dependencies = [
  "fixed-buffer-allocator",
  "page-allocator",
  "safe-allocator",
+ "smp-allocator",
 ]
 
 [[package]]
@@ -58,3 +59,7 @@ version = "0.1.0"
 [[package]]
 name = "smp-allocator"
 version = "0.1.0"
+dependencies = [
+ "libc",
+ "page-allocator",
+]

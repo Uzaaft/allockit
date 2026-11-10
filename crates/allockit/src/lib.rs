@@ -25,3 +25,10 @@ pub use page_allocator::PageAllocator;
 
 #[cfg(feature = "safe-allocator")]
 pub use safe_allocator::{CheckError, LeakReport, Options, SafeAllocator};
+
+#[cfg(all(
+    feature = "smp-allocator",
+    feature = "std",
+    any(target_os = "macos", target_os = "linux")
+))]
+pub use smp_allocator::SmpAllocator;

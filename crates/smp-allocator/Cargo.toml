@@ -9,6 +9,10 @@ repository.workspace = true
 [lints]
 workspace = true
 
+[target.'cfg(any(target_os = "macos", target_os = "linux"))'.dependencies]
+page-allocator = { workspace = true, optional = true }
+libc = { version = "0.2", default-features = false, optional = true }
+
 [features]
 default = ["std"]
-std = []
+std = ["dep:page-allocator", "page-allocator/std", "dep:libc"]

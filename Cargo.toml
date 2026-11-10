@@ -16,6 +16,7 @@ failing-allocator = { path = "crates/failing-allocator", version = "0.1.0", defa
 fixed-buffer-allocator = { path = "crates/fixed-buffer-allocator", version = "0.1.0", default-features = false }
 page-allocator = { path = "crates/page-allocator", version = "0.1.0", default-features = false }
 safe-allocator = { path = "crates/safe-allocator", version = "0.1.0", default-features = false }
+smp-allocator = { path = "crates/smp-allocator", version = "0.1.0", default-features = false }
 
 [workspace.metadata.crane]
 name = "allockit"

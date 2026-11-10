@@ -17,10 +17,11 @@ failing-allocator = { workspace = true, optional = true }
 fixed-buffer-allocator = { workspace = true, optional = true }
 page-allocator = { workspace = true, optional = true }
 safe-allocator = { workspace = true, optional = true }
+smp-allocator = { workspace = true, optional = true }
 
 [features]
 default = ["std"]
-std = ["arena-allocator?/std", "atomic-fixed-buffer-allocator?/std", "buffer-first-allocator?/std", "failing-allocator?/std", "fixed-buffer-allocator?/std", "page-allocator?/std", "safe-allocator?/std"]
+std = ["arena-allocator?/std", "atomic-fixed-buffer-allocator?/std", "buffer-first-allocator?/std", "failing-allocator?/std", "fixed-buffer-allocator?/std", "page-allocator?/std", "safe-allocator?/std", "smp-allocator?/std"]
 arena-allocator = ["dep:arena-allocator"]
 atomic-fixed-buffer-allocator = ["dep:atomic-fixed-buffer-allocator"]
 buffer-first-allocator = ["dep:buffer-first-allocator"]
@@ -28,6 +29,7 @@ failing-allocator = ["dep:failing-allocator"]
 fixed-buffer-allocator = ["dep:fixed-buffer-allocator"]
 page-allocator = ["dep:page-allocator"]
 safe-allocator = ["dep:safe-allocator"]
+smp-allocator = ["dep:smp-allocator"]
 
 [package.metadata.docs.rs]
 all-features = true
