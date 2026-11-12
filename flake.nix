@@ -84,6 +84,10 @@
             packages = [ self.formatter.${system} ];
           };
 
+          ci = pkgs.mkShell {
+            packages = [ pkgs.rust-bin.beta.latest.minimal ];
+          };
+
           # Miri only ships on nightly. Use with `nix develop .#miri -c cargo miri test`.
           miri = pkgs.mkShell {
             packages = [
