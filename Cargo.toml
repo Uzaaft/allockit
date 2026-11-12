@@ -27,3 +27,5 @@ missing_docs = "warn"
 
 [workspace.lints.clippy]
 undocumented_unsafe_blocks = "deny"
+unwrap_used = "deny"
+expect_used = "deny"
