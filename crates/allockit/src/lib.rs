@@ -17,6 +17,9 @@ pub use buffer_first_allocator::BufferFirstAllocator;
 #[cfg(feature = "failing-allocator")]
 pub use failing_allocator::{Config, FailingAllocator};
 
+#[cfg(feature = "fixed-buffer-allocator")]
+pub use fixed_buffer_allocator::FixedBufferAllocator;
+
 #[cfg(all(
     feature = "page-allocator",
     any(target_os = "macos", target_os = "linux")
