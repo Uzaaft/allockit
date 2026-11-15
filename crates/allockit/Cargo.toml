@@ -21,6 +21,16 @@ smp-allocator = { workspace = true, optional = true }
 
 [features]
 default = ["std"]
+all = [
+    "arena-allocator",
+    "atomic-fixed-buffer-allocator",
+    "buffer-first-allocator",
+    "failing-allocator",
+    "fixed-buffer-allocator",
+    "page-allocator",
+    "safe-allocator",
+    "smp-allocator",
+]
 std = ["arena-allocator?/std", "atomic-fixed-buffer-allocator?/std", "buffer-first-allocator?/std", "failing-allocator?/std", "fixed-buffer-allocator?/std", "page-allocator?/std", "safe-allocator?/std", "smp-allocator?/std"]
 arena-allocator = ["dep:arena-allocator"]
 atomic-fixed-buffer-allocator = ["dep:atomic-fixed-buffer-allocator"]
