@@ -7,18 +7,19 @@ extern crate std;
 use core::alloc::{AllocError, Allocator, Layout};
 use core::cell::Cell;
 use core::marker::PhantomData;
+use core::mem::MaybeUninit;
 use core::ptr::{self, NonNull};
 
 pub struct FixedBufferAllocator<'a> {
     end_index: Cell<usize>,
     base: NonNull<u8>,
     len: usize,
-    _buffer: PhantomData<&'a mut [u8]>,
+    _buffer: PhantomData<&'a mut [MaybeUninit<u8>]>,
 }
 
 #[allow(clippy::undocumented_unsafe_blocks)]
 impl<'a> FixedBufferAllocator<'a> {
-    pub fn new(buffer: &'a mut [u8]) -> Self {
+    pub fn new(buffer: &'a mut [MaybeUninit<u8>]) -> Self {
         Self {
             end_index: Cell::new(0),
             len: buffer.len(),

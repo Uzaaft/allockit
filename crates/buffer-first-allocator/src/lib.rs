@@ -5,6 +5,7 @@
 extern crate std;
 
 use core::alloc::{AllocError, Allocator, Layout};
+use core::mem::MaybeUninit;
 use core::ptr::{self, NonNull};
 use fixed_buffer_allocator::FixedBufferAllocator;
 
@@ -15,14 +16,14 @@ pub struct BufferFirstAllocator<'a, A: Allocator> {
 
 #[cfg(feature = "std")]
 impl<'a> BufferFirstAllocator<'a, std::alloc::Global> {
-    pub fn new(buffer: &'a mut [u8]) -> Self {
+    pub fn new(buffer: &'a mut [MaybeUninit<u8>]) -> Self {
         Self::new_in(std::alloc::Global, buffer)
     }
 }
 
 #[allow(clippy::undocumented_unsafe_blocks)]
 impl<'a, A: Allocator> BufferFirstAllocator<'a, A> {
-    pub fn new_in(fallback_allocator: A, buffer: &'a mut [u8]) -> Self {
+    pub fn new_in(fallback_allocator: A, buffer: &'a mut [MaybeUninit<u8>]) -> Self {
         Self {
             fixed_buffer_allocator: FixedBufferAllocator::new(buffer),
             fallback_allocator,

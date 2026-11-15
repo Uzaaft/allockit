@@ -1,19 +1,18 @@
-//! Test that safe allocator use leaves the borrowed backing storage initialized.
-#![cfg(miri)]
 #![allow(missing_docs)]
 
 use buffer_first_allocator::BufferFirstAllocator;
 use std::alloc::Global;
 use std::mem::MaybeUninit;
 
+/// Test that borrowed backing storage can become uninitialized and be initialized again.
 #[test]
-fn backing_storage_remains_initialized() {
-    let mut backing = [0u8; 1];
+fn backing_storage_can_be_reinitialized() {
+    let mut backing = [MaybeUninit::new(0u8); 1];
 
     {
         let allocator = BufferFirstAllocator::new_in(Global, &mut backing);
         let _ = Box::new_in(MaybeUninit::<u8>::uninit(), &allocator);
     }
 
-    assert_eq!(backing[0], 0);
+    assert_eq!(*backing[0].write(42), 42);
 }

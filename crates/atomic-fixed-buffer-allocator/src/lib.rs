@@ -6,6 +6,7 @@ extern crate std;
 
 use core::alloc::{AllocError, Allocator, Layout};
 use core::marker::PhantomData;
+use core::mem::MaybeUninit;
 use core::ptr::{self, NonNull};
 use core::sync::atomic::{AtomicUsize, Ordering};
 
@@ -13,7 +14,7 @@ pub struct AtomicFixedBufferAllocator<'a> {
     end_index: AtomicUsize,
     base: NonNull<u8>,
     len: usize,
-    _buffer: PhantomData<&'a mut [u8]>,
+    _buffer: PhantomData<&'a mut [MaybeUninit<u8>]>,
 }
 
 #[allow(clippy::undocumented_unsafe_blocks)]
@@ -24,7 +25,7 @@ unsafe impl Sync for AtomicFixedBufferAllocator<'_> {}
 
 #[allow(clippy::undocumented_unsafe_blocks)]
 impl<'a> AtomicFixedBufferAllocator<'a> {
-    pub fn new(buffer: &'a mut [u8]) -> Self {
+    pub fn new(buffer: &'a mut [MaybeUninit<u8>]) -> Self {
         Self {
             end_index: AtomicUsize::new(0),
             len: buffer.len(),
